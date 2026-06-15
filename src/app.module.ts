@@ -16,6 +16,12 @@ import { TokenModule } from './token/token.module';
 import { OtpModule } from './otp/otp.module';
 import { PaymentModule } from './payment/payment.module';
 import { MlOchestrationModule } from './ml-ochestration/ml-ochestration.module';
+import { RuntimeEngineModule } from './runtime-engine/runtime-engine.module';
+import { GraphModule } from './graph/graph.module';
+import { CompilerModule } from './compiler/compiler.module';
+import { FlowModule } from './flow/flow.module';
+import { RedisModule } from './infra/redis/redis.module';
+import { InMemorySceneEventBusService } from './runtime/events/in-memory-scene-event-bus/in-memory-scene-event-bus.service';
 
 
 @Module({
@@ -35,8 +41,8 @@ import { MlOchestrationModule } from './ml-ochestration/ml-ochestration.module';
   database: 'premiumventures',
   autoLoadEntities: true,
   synchronize: true, // dev only
-}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule,],
+}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule, RuntimeEngineModule, GraphModule, CompilerModule, RedisModule,],
   controllers: [AppController],
-  providers: [AppService, Src\auth\services\authFlowServiceService, Auth\services\authFlowService, Auth\services\authFlowService, Auth\services\authFlowService, ],
+  providers: [AppService, Src\auth\services\authFlowServiceService, Auth\services\authFlowService, Auth\services\authFlowService, Auth\services\authFlowService, InMemorySceneEventBusService, ],
 })
 export class AppModule {}
