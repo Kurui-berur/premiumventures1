@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { SceneEventBus } from '../contracts/scene-event-bus.interface';
 import { SceneEvent } from '../types/scene-event.type';
+import { Handler } from '../types/event-handler.type';
 
 
-type Handler =
-(event: SceneEvent) => Promise<void> | void;
+
 
 @Injectable()
 export class InMemorySceneEventBusService implements SceneEventBus{
