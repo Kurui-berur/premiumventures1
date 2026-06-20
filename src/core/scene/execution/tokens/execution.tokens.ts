@@ -1,0 +1,14 @@
+export const EXECUTION_FRAME_FACTORY =
+  Symbol('EXECUTION_FRAME_FACTORY');
+
+export const EXECUTION_JOURNAL =
+  Symbol('EXECUTION_JOURNAL');
+
+export const EVENT_HANDLER =
+  Symbol('EVENT_HANDLER');
+export const PLUGIN_EXECUTOR=Symbol( 'PLUGIN_EXECUTOR');
+
+export const EXECUTION_TRACKER =
+Symbol(
+'EXECUTION_TRACKER'
+);

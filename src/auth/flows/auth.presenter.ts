@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FlowPresenter } from '../../flow/contracts/flow-presenter';
+import { FlowPresenter } from '../../core/flow/contracts/flow-presenter';
 
 @Injectable()
 export class AuthPresenter implements FlowPresenter {

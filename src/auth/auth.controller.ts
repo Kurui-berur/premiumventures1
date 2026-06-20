@@ -1,5 +1,5 @@
 import { Controller, Post, Param, Body } from '@nestjs/common';
-import { FlowEngine } from '../flow/core/flow.engine';
+import { FlowEngine } from '../core/flow/core/flow.engine';
 
 @Controller('auth')
 export class AuthController {

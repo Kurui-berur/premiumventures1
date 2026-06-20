@@ -1,8 +1,8 @@
 import { OnModuleInit, Module } from '@nestjs/common';
-import { FlowRegistry } from '../flow/core/flow.registry';
+import { FlowRegistry } from '../core/flow/core/flow.registry';
 import { AuthFlow } from './flows/auth.flow';
 import { AuthPresenter } from './flows/auth.presenter';
-import { FlowModule } from '../flow/flow.module';
+import { FlowModule } from '../core/flow/flow.module';
 import { AuthFlowService } from './services/auth-flow.service';
 import { AuthFlowHandlerService } from './services/auth-flow-handler.service';
 

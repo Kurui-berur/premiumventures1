@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FlowHandler } from '../../flow/contracts/flow-handler.interface';
+import { FlowHandler } from '../../core/flow/contracts/flow-handler.interface';
 import { AuthEventType } from '../constants/auth-event.enum';
 import { AuthState } from '../constants/auth-states';
 
