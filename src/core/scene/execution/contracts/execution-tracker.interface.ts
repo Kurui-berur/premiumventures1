@@ -22,4 +22,13 @@ export interface ExecutionTracker {
     decision: PluginDecision
   ): Promise<void>;
 
+
+/**
+ * Event entered queue
+ */
+queued(
+event: SceneEvent
+): Promise<void>;
+
+
 }

@@ -27,38 +27,15 @@ event:
 SceneEvent
 ): Promise<void>{
 
-await this
-.tracker
-.event(
-event
-);
+await this.tracker.event(event);
 
-const frame =
-this.frames
-.create(
-event
-);
+const frame =this.frames.create(event);
 
-await this
-.tracker
-.frame(
-frame
-);
+await this.tracker.frame(frame);
 
-const decision =
-await this
-.executor
-.execute(
-frame
-);
+const decision =await this.executor.execute(frame);
 
-await this
-.tracker
-.decision(
-frame,
-decision
-);
+await this.tracker.decision(frame,decision);
 
 }
-    
 }

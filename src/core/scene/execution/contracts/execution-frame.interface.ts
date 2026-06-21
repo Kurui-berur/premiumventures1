@@ -3,6 +3,7 @@
 import { SceneEvent } from 'src/core/events/types/scene-event.type';
 import { FlowRuntimeState }
 from '../../../flow/runtime/state/flow-runtime-state';
+import { ExecutionMode } from '../types/execution-mode.types';
 
 export interface ExecutionFrame {
 
@@ -18,6 +19,8 @@ export interface ExecutionFrame {
     Readonly<
       Record<string, unknown>
     >;
+
+    mode:ExecutionMode;
 
   timestamp: number;
 

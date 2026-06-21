@@ -19,6 +19,7 @@ ExecutionJournal
 
 ){}
 
+
 async event(
 event
 ){
@@ -94,4 +95,23 @@ decision
 });
 
 }
+
+  async queued(event: SceneEvent): Promise<void> {
+      await this.journal.record({
+         executionId:'pending',
+
+         flowId:
+         'unknown',
+
+         stage:'EVENT_QUEUED',
+
+         timestamp:
+         Date.now(),
+
+         payload:
+         event
+
+         });
+
+   }
 }

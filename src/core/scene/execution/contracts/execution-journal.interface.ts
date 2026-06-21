@@ -8,4 +8,12 @@ export interface ExecutionJournal {
     EngineLogEntry
   ): Promise<void>;
 
+  /**
+ * Read execution history
+ */
+entries():
+Promise<
+readonly EngineLogEntry[]
+>;
+
 }

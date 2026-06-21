@@ -12,3 +12,27 @@ export const EXECUTION_TRACKER =
 Symbol(
 'EXECUTION_TRACKER'
 );
+export const TRANSITION_EXECUTOR =
+Symbol(
+  'TRANSITION_EXECUTOR'
+);
+
+export const SCENE_ACTIVATOR =
+Symbol(
+'SCENE_ACTIVATOR'
+);
+
+export const SCENE_LIFECYCLE =
+Symbol(
+'SCENE_LIFECYCLE'
+);
+
+export const EXECUTION_QUEUE =
+Symbol(
+'EXECUTION_QUEUE'
+);
+
+export const RUNTIME_CHECKPOINT =
+Symbol(
+'RUNTIME_CHECKPOINT'
+);
