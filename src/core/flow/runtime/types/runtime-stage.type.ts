@@ -1,0 +1,11 @@
+export type RuntimeStage =
+
+| 'STATE_REPLACED'
+
+| 'PATCH_APPLIED'
+
+| 'CHECKPOINT_SAVED'
+
+| 'CHECKPOINT_RESTORED'
+
+| 'REPLAY_APPLIED';

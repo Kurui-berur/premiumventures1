@@ -10,3 +10,7 @@ export type ExecutionStage =
   | 'EXECUTION_COMPLETED'
   | 'EXECUTION_FAILED'
   | 'EVENT_QUEUED'
+  | 'TX_STARTED'
+  | 'TX_COMPLETED'
+  | 'TX_FAILED'
+  | 'TX_ROLLBACK'

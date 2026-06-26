@@ -7,12 +7,12 @@ import { SceneEvent } from "../types/scene-event.type";
 export interface SceneEventBus {
 
   /**
-   * Publish an event.
+   * something happens tell interested parties
    */
   dispatch(event: SceneEvent): Promise<void>;
 
   /**
-   * Subscribe to events.
+   * when events happens call me
    */
   subscribe(
     handler: (event: SceneEvent) => Promise<void> | void

@@ -2,10 +2,11 @@ import { Inject, Injectable } from '@nestjs/common';
 import { DecisionApplier } from '../../contracts/decision-applier.interface';
 import { PluginDecision } from 'src/core/plugins/contracts/plugin-decision.interface';
 import { ExecutionFrame } from '../../contracts/execution-frame.interface';
-import type { RuntimeWriter } from 'src/core/flow/runtime/contracts/flow-writer.interface';
+import type { RuntimeWriter } from 'src/core/flow/runtime/contracts/runtime-writer.interface';
 import type { TransitionExecutor } from '../../contracts/transition-executor.interface';
-import { RUNTIME_CHECKPOINT, TRANSITION_EXECUTOR } from '../../tokens/execution.tokens';
+import { EXECUTION_TRANSACTION, RUNTIME_CHECKPOINT, TRANSITION_EXECUTOR } from '../../tokens/execution.tokens';
 import type { RuntimeCheckpointStore } from '../../contracts/runtime-checkpoint-store.interface';
+import type { ExecutionTransaction } from '../../contracts/execution-transaction.interface';
 
 @Injectable()
 export class DefaultDecisionApplier implements DecisionApplier {
@@ -17,7 +18,10 @@ export class DefaultDecisionApplier implements DecisionApplier {
         private readonly transitions:TransitionExecutor,
 
         @Inject(RUNTIME_CHECKPOINT)
-        private readonly checkpoint:RuntimeCheckpointStore
+        private readonly checkpoint:RuntimeCheckpointStore,
+
+        @Inject(EXECUTION_TRANSACTION)
+        private readonly transaction:ExecutionTransaction
 
     ){}
 
@@ -123,11 +127,20 @@ decision
 
   };
 
-  await this.runtime .update(nextState);
+  await this.transaction.execute( frame,
+    async()=>{
 
-  await this.transitions.execute(frame,decision)
+        await this.runtime .update(nextState);
 
-  await  this.checkpoint.save(nextState)
+        await this.transitions.execute(frame,decision)
+
+        await  this.checkpoint.save(nextState)
+
+
+    }
+  )
+
+ 
 
 }
 

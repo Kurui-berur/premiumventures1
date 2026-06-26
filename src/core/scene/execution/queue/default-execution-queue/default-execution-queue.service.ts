@@ -3,8 +3,9 @@ import { ExecutionQueue } from '../../contracts/execution-queue.interface';
 import { SceneEvent } from 'src/core/events/types/scene-event.type';
 import { SceneEventIntakeHandler } from '../../handlers/scene-event-intake.handler';
 import type { ExecutionJournal } from '../../contracts/execution-journal.interface';
-import { EXECUTION_JOURNAL, EXECUTION_TRACKER } from '../../tokens/execution.tokens';
+import { EXECUTION_COORDINATOR, EXECUTION_JOURNAL, EXECUTION_TRACKER } from '../../tokens/execution.tokens';
 import type { ExecutionTracker } from '../../contracts/execution-tracker.interface';
+import type { ExecutionCoordinator } from '../../contracts/execution-coordinator.interface';
 
 @Injectable()
 export class DefaultExecutionQueueService implements ExecutionQueue{
@@ -15,11 +16,8 @@ export class DefaultExecutionQueueService implements ExecutionQueue{
         private running=false;
 
         constructor(
-            private readonly intake:SceneEventIntakeHandler,
-
-            @Inject(EXECUTION_JOURNAL)
-            
-            private readonly journal:ExecutionJournal,
+            @Inject(EXECUTION_COORDINATOR)
+            private readonly coordinator:ExecutionCoordinator,
 
             @Inject(EXECUTION_TRACKER)
             private readonly tracker:ExecutionTracker
@@ -61,7 +59,7 @@ export class DefaultExecutionQueueService implements ExecutionQueue{
                     continue
                 }
 
-                await this.intake.handle(next)
+                await this.coordinator.execute(next)
             }
 
         } finally{

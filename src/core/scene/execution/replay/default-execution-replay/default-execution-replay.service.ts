@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ExecutionReplay } from '../../contracts/execution-replay.interface';
-import type { RuntimeWriter } from 'src/core/flow/runtime/contracts/flow-writer.interface';
+import type { RuntimeWriter } from 'src/core/flow/runtime/contracts/runtime-writer.interface';
 import type { ExecutionJournal } from '../../contracts/execution-journal.interface';
 import { EXECUTION_JOURNAL, RUNTIME_CHECKPOINT } from '../../tokens/execution.tokens';
 import { FlowRuntimeState } from 'src/core/flow/runtime/state/flow-runtime-state';

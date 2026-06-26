@@ -3,17 +3,13 @@ from '../logs/engine-log-entry.interface';
 
 export interface ExecutionJournal {
 
-  record(
-    entry:
-    EngineLogEntry
-  ): Promise<void>;
+  record(entry:EngineLogEntry): Promise<void>;
 
   /**
  * Read execution history
  */
-entries():
-Promise<
-readonly EngineLogEntry[]
->;
+entries():Promise<readonly EngineLogEntry[]>;
 
+
+entriesAfter( timestamp: number, limit: number ): Promise< readonly EngineLogEntry[] >;
 }

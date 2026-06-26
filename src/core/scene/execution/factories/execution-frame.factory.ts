@@ -4,6 +4,7 @@ import { SceneEvent } from "src/core/events/types/scene-event.type";
 import { ExecutionFrame } from "../contracts/execution-frame.interface";
 import type { RuntimeReader } from "src/core/flow/runtime/contracts/runtime-reader.interface";
 import type { GuardReader } from "src/core/guards/contracts/guard-reader.interface";
+import { ExecutionMode } from "../types/execution-mode.types";
 
 @Injectable()
 export class DefaultExecutionFrameFactory
@@ -16,7 +17,8 @@ implements ExecutionFrameFactory {
 
 
     create(event: SceneEvent): ExecutionFrame {
-        
+        const mode: ExecutionMode =
+      'ORIGINAL';
         return{
 
             executionId:crypto.randomUUID(),
@@ -27,6 +29,8 @@ implements ExecutionFrameFactory {
             state:Object.freeze(this.runtime.state()),
 
             guards:Object.freeze(this.guards.snapshot()),
+
+            mode,
 
             timestamp:Date.now()
 

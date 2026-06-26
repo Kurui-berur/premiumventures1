@@ -24,6 +24,8 @@ import { RedisModule } from './infra/redis/redis.module';
 import { InMemorySceneEventBusService } from './runtime/events/in-memory-scene-event-bus/in-memory-scene-event-bus.service';
 import { PluginsModule } from './core/plugins/plugins.module';
 import { SceneModule } from './core/scene/scene.module';
+import { InfrastructureModule } from './infra/infrastructure/infrastructure.module';
+import { InMemomryFlowRuntimeStorService } from './cor/flow/runtime/store/in-memomry-flow-runtime-stor/in-memomry-flow-runtime-stor.service';
 
 
 @Module({
@@ -43,8 +45,7 @@ import { SceneModule } from './core/scene/scene.module';
   database: 'premiumventures',
   autoLoadEntities: true,
   synchronize: true, // dev only
-}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule, RuntimeEngineModule, GraphModule, CompilerModule, RedisModule, PluginsModule, SceneModule,],
+}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule, RuntimeEngineModule, GraphModule, CompilerModule, RedisModule, PluginsModule, SceneModule, InfrastructureModule,],
   controllers: [AppController],
-  providers: [AppService, Src\auth\services\authFlowServiceService, Auth\services\authFlowService, Auth\services\authFlowService, Auth\services\authFlowService, InMemorySceneEventBusService, ],
-})
+  providers: [AppService, InMemomryFlowRuntimeStorService]
 export class AppModule {}

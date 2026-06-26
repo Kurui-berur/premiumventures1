@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { SceneActivator } from '../../contracts/scene-activator.interface';
 import type { GraphReader } from 'src/graph/graph-core/contracts/graph-reader.interface';
 import { FlowRuntimeState } from 'src/core/flow/runtime/state/flow-runtime-state';
+import { NodeRuntimeState } from 'src/core/flow/runtime/state/node-runtime-state';
+import { SceneRuntimeState } from 'src/core/flow/runtime/state/scene-runtime-state';
 
 @Injectable()
 export class DefaultSceneActivatorService implements SceneActivator {
@@ -19,7 +21,7 @@ async activate(state: FlowRuntimeState, targetSceneId: string): Promise<FlowRunt
         return state
     }
 
-    const nodeStates=new Map()
+    const nodeStates =new Map<string,NodeRuntimeState>();
 
     for(const nodeId of scene.nodeIds){
 
@@ -36,14 +38,14 @@ async activate(state: FlowRuntimeState, targetSceneId: string): Promise<FlowRunt
         })
     }
 
-    const sceneStates=new Map()
+    const sceneStates=new Map<string,SceneRuntimeState>()
 
     sceneStates.set(
         targetSceneId,
         {
             sceneId:targetSceneId,
 
-            interacted:false,
+            visited:false,
 
             completed:false
         }

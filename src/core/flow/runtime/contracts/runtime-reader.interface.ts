@@ -8,7 +8,5 @@ export interface RuntimeReader {
     FlowRuntimeState
   >;
 
-  flowId():
-  string;
 
 }

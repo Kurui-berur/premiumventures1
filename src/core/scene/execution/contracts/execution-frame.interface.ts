@@ -15,12 +15,9 @@ export interface ExecutionFrame {
 
   state: Readonly<FlowRuntimeState>;
 
-  guards:
-    Readonly<
-      Record<string, unknown>
-    >;
+  guards: Readonly<Record<string, unknown>>;
 
-    mode:ExecutionMode;
+  mode:ExecutionMode;
 
   timestamp: number;
 
