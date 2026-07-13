@@ -1,9 +1,16 @@
-import { ExecutionFrame }
-from './execution-frame.interface';
+import { ExecutionSession } from '../context/execution-context.class';
+
 
 export interface ExecutionMiddleware {
 
-execute<TResult>(frame: ExecutionFrame,
-    next: () => Promise<TResult>): Promise<TResult>;
+  execute<TResult>(
+
+    context:
+      ExecutionSession,
+
+    next:
+      () => Promise<TResult>
+
+  ): Promise<TResult>;
 
 }

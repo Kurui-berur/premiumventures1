@@ -2,29 +2,18 @@ import {
   FlowRuntimeState
 }
 from '../state/flow-runtime-state';
+import { RuntimeMutation } from '../types/runtime-mutation.type';
 import { FlowRuntimeStatePatch } from './runtime-state-patch.interface';
 
 
 export interface RuntimeCoordinator {
 
-  replace(
+ apply(
 
-    flowId:
-    string,
+flowInstanceId:string,
 
-    state:
-    FlowRuntimeState
+mutation:RuntimeMutation
 
-  ): Promise<void>;
-
-  patch(
-
-    flowId:
-    string,
-
-    patch:
-    FlowRuntimeStatePatch
-
-  ): Promise<void>;
+): Promise<void>;
 
 }

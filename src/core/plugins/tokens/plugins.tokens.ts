@@ -1,0 +1,1 @@
+export const PLUGIN_REGISTRY= Symbol('PLUGIN_REGISTRY')

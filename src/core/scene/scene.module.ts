@@ -5,7 +5,7 @@ import { DefaultExecutionFrameFactory } from './execution/factories/execution-fr
 import { SceneEventIntakeHandler } from './execution/handlers/scene-event-intake.handler';
 import { ExecutionJournalStore } from './execution/logs/execution-journal.store';
 import { ExecutionFrameFactory } from './execution/contracts/execution-frame-factory.interface';
-import { DECISION_PATCH_EXECUTOR, EXECUTION_COORDINATOR, EXECUTION_FRAME_FACTORY, EXECUTION_JOURNAL, EXECUTION_MIDDLEWARE, EXECUTION_QUEUE, EXECUTION_TRACKER, EXECUTION_TRANSACTION, RUNTIME_CHECKPOINT, SCENE_ACTIVATOR, SCENE_LIFECYCLE, TRANSITION_EXECUTOR } from './execution/tokens/execution.tokens';
+import { DECISION_PATCH_EXECUTOR, EXECUTION_COORDINATOR, EXECUTION_DEDUPLICATOR, EXECUTION_FRAME_FACTORY, EXECUTION_JOURNAL, EXECUTION_MIDDLEWARE, EXECUTION_QUEUE, EXECUTION_TRACKER, EXECUTION_TRANSACTION, RUNTIME_CHECKPOINT, SCENE_ACTIVATOR, SCENE_LIFECYCLE, TRANSITION_EXECUTOR } from './execution/tokens/execution.tokens';
 import { DefaultExecutionTrackerService } from './execution/tracking/default-execution-tracker/default-execution-tracker.service';
 import { DefaultTransitionExecutorService } from './execution/transitions/default-transition-executor/default-transition-executor.service';
 import { DefaultSceneActivatorService } from './execution/transitions/default-scene-activator/default-scene-activator.service';
@@ -19,8 +19,22 @@ import { ExecutionLoggingMiddlewareService } from './execution/middlewares/execu
 import { DefaultExecutionCoordinatorService } from './execution/coordinator/default-execution-coordinator/default-execution-coordinator.service';
 import { DefaultDecisionPatchExecutorService } from './execution/services/decision-patch/default-decision-patch-executor/default-decision-patch-executor.service';
 import { BullExecutionQueueService } from './execution/queue/bull-execution-queue/bull-execution-queue.service';
+import { InMemoryExecutionDeduplicatorService } from './execution/deduplicator/in-memory-execution-deduplicator/in-memory-execution-deduplicator.service';
+import { DefaultExecutionIdGeneratorService } from './execution/services/default-execution-id-generator/default-execution-id-generator.service';
+
+import { DefaultPluginRegistryService } from './execution/services/default-plugin-registry/default-plugin-registry.service';
+
+import { PluginsModule } from '../plugins/plugins.module';
+import { DefaultPluginPipelineService } from './execution/plugins/services/default-plugin-pipeline/default-plugin-pipeline.service';
+import { DefaultMiddlewareChainService } from './execution/middlewares/services/default-middleware-chain/default-middleware-chain.service';
+import { DefaultExecutionContextFactoryService } from './execution/context/factory/default-execution-context-factory/default-execution-context-factory.service';
+import { ExecutionTimingMiddlewareService } from './execution/middlewares/timing/execution-timing-middleware/execution-timing-middleware.service';
+import { DefaultDecisionPatchPipelineService } from './executionpipelines/default-decision-patch-pipeline/default-decision-patch-pipeline.service';
+import { DefaultDecisionPatchPipelineService } from './execution/pipelines/default-decision-patch-pipeline/default-decision-patch-pipeline.service';
+import { DefaultRuntimePipelineService } from './execution/pipelines/default-runtime-pipeline/default-runtime-pipeline.service';
+import { DefaultTransitionPipelineService } from './execution/pipelines/default-transition-pipeline/default-transition-pipeline.service';
 @Module({
-  imports: [LogsModule],
+  imports: [LogsModule,PluginsModule],
   providers: [
 
 SceneProcessor,SceneEventIntakeHandler,
@@ -49,6 +63,18 @@ DefaultExecutionTransactionService,
 DefaultExecutionCoordinatorService,
 
 DefaultDecisionPatchExecutorService,
+
+InMemoryExecutionDeduplicatorService,
+
+{
+
+provide:
+EXECUTION_DEDUPLICATOR,
+
+useExisting:
+InMemoryExecutionDeduplicatorService
+
+},
 
 {
   provide:
@@ -181,9 +207,18 @@ DefaultDecisionPatchExecutorService,
 
 BullExecutionQueueService,
 
+InMemoryExecutionDeduplicatorService,
 
+DefaultExecutionIdGeneratorService,
 
+DefaultPluginRegistryService,
 
+DefaultPluginPipelineService,
+
+DefaultPluginPipelineService,
+
+DefaultMiddlewareChainService,
+, DefaultExecutionContextFactoryService, ExecutionTimingMiddlewareService, DefaultDecisionPatchPipelineService, DefaultRuntimePipelineService, DefaultTransitionPipelineService,
 
 ]
 })

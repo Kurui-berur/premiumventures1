@@ -10,15 +10,28 @@ export class DefaultRuntimePatchBuilderService implements RuntimePatchBuilder{
         
         next: FlowRuntimeState): FlowRuntimeStatePatch {
 
-           return {
-            currentSceneId:next.currentSceneId,
+            const patch:FlowRuntimeStatePatch={}
 
-            activeNodeId:next.activeNodeId,
+            if(current.currentSceneId!==next.currentSceneId){
 
-            nodeStates:next.nodeStates,
+                patch.currentSceneId=next.currentSceneId
 
-            sceneStates:next.sceneStates
-           }
+            }
+
+
+            if(current.activeNodeId!==next.activeNodeId){
+                patch.activeNodeId=next.activeNodeId
+            }
+
+            if(current.nodeStates!==next.nodeStates){
+                patch.nodeStates=next.nodeStates
+            }
+
+            if (current.sceneStates!==next.sceneStates){
+                patch.sceneStates=next.sceneStates
+            }
+
+           return patch
        
     }
 

@@ -26,6 +26,13 @@ import { PluginsModule } from './core/plugins/plugins.module';
 import { SceneModule } from './core/scene/scene.module';
 import { InfrastructureModule } from './infra/infrastructure/infrastructure.module';
 import { InMemomryFlowRuntimeStorService } from './cor/flow/runtime/store/in-memomry-flow-runtime-stor/in-memomry-flow-runtime-stor.service';
+import { ApplicationModule } from './application/application.module';
+import { DefaultFlowApplicationServicesTsService } from './appplication/services/default-flow-application.services.ts/default-flow-application.services.ts.service';
+import { FlowModule } from './flow/flow.module';
+import { DefaultGuardRegistryService } from './core/guards/services/default-guard-registry/default-guard-registry.service';
+import { DefaultPluginRegistryService } from './plugins/services/default-plugin-registry/default-plugin-registry.service';
+import { DefaultFlowLoaderService } from './default-flow-loader/default-flow-loader.service';
+import { FlowModule } from './flow/flow.module';
 
 
 @Module({
@@ -45,7 +52,7 @@ import { InMemomryFlowRuntimeStorService } from './cor/flow/runtime/store/in-mem
   database: 'premiumventures',
   autoLoadEntities: true,
   synchronize: true, // dev only
-}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule, RuntimeEngineModule, GraphModule, CompilerModule, RedisModule, PluginsModule, SceneModule, InfrastructureModule,],
+}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule, RuntimeEngineModule, GraphModule, CompilerModule, RedisModule, PluginsModule, SceneModule, InfrastructureModule, ApplicationModule,],
   controllers: [AppController],
-  providers: [AppService, InMemomryFlowRuntimeStorService]
+  providers: [AppService, InMemomryFlowRuntimeStorService, DefaultFlowApplicationServicesTsService, DefaultFlowLoaderService, DefaultPluginRegistryService, DefaultGuardRegistryService]
 export class AppModule {}

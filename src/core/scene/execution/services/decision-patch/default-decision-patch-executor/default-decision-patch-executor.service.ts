@@ -1,107 +1,106 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { DecisionPatchExecutor } from '../../../contracts/decision-patch-executor.interface';
-import { PluginDecision } from 'src/core/plugins/contracts/plugin-decision.interface';
-import { ExecutionFrame } from '../../../contracts/execution-frame.interface';
-import type { RuntimeWriter } from 'src/core/flow/runtime/contracts/runtime-writer.interface';
-import { RUNTIME_WRITER } from 'src/core/flow/runtime/tokens/runtime-tokens';
-import { map } from 'rxjs';
+import {
+Injectable
+}
+from '@nestjs/common';
+
+import {
+DecisionPatchExecutor
+}
+from '../../../contracts/decision-patch-executor.interface';
+
+import {
+PluginDecision
+}
+from
+'src/core/plugins/contracts/plugin-decision.interface';
+
+import {
+ExecutionFrame
+}
+from '../../../contracts/execution-frame.interface';
+
+import {
+RuntimeMutation
+}
+from
+'src/core/flow/runtime/types/runtime-mutation.type';
+import {  ExecutionSession } from '../../../context/execution-context.class';
 
 @Injectable()
-export class DefaultDecisionPatchExecutorService implements DecisionPatchExecutor{
+export class DefaultDecisionPatchExecutorService
+implements DecisionPatchExecutor {
 
-    constructor(
-        @Inject(RUNTIME_WRITER)
-        private readonly runtime:RuntimeWriter
-    ){
+async execute(context: ExecutionSession): Promise<void> {
 
-    }                  
+    const runtime =
+      context.runtime.current();
 
-   async execute(frame: ExecutionFrame, decision: PluginDecision): Promise<void> {
+    const decision =
+      context.state.requireDecision();
 
-               // Mutable working copies
-    const nodeStates =
-      new Map(
-        frame.state.nodeStates
+      const nodeStates =new Map(
+      runtime.nodeStates
       );
 
-    const sceneStates =
-      new Map(
-        frame.state.sceneStates
+      const sceneStates =new Map(
+      runtime.sceneStates
       );
 
-    /*
-    --------------------
-    NODE PATCHES
-    --------------------
-    */
+      decision.nodeStatePatch?.forEach(
 
-    decision.nodeStatePatch?.forEach(
-      (
-        patch,
-        nodeId
-      ) => {
+              (patch,nodeId)=>{
 
-        const current =
-          nodeStates.get(
-            nodeId
+                    const current =nodeStates.get(nodeId);
+
+                    if(!current){return;
+
+                    }
+
+                    nodeStates.set(nodeId,
+                  {
+
+                      ...current,
+
+                      ...patch
+
+                    });
+
+              }
+
           );
 
-        if (!current) {
-          return;
-        }
+      decision.sceneStatePatch?.forEach(
 
-        nodeStates.set(
-          nodeId,
-          {
-            ...current,
-            ...patch
-          }
-        );
+        (patch,sceneId)=>{
 
-      }
-    );
+              const current =sceneStates.get(sceneId);
 
-    /*
-    --------------------
-    SCENE PATCHES
-    --------------------
-    */
+              if(!current){
+              return;
+              }
 
-    decision.sceneStatePatch?.forEach(
-      (
-        patch,
-        sceneId
-      ) => {
+              sceneStates.set(sceneId, {
 
-        const current =
-          sceneStates.get(
-            sceneId
-          );
+                    ...current,
 
-        if (!current) {
-          return;
-        }
+                    ...patch
 
-        sceneStates.set(
-          sceneId,
-          {
-            ...current,
-            ...patch
-          }
-        );
+              }  );
 
-      }
-    );
+          });
 
-    await this.runtime.update({
+    const next={
 
-      ...frame.state,
+      ...runtime,
 
       nodeStates,
 
       sceneStates
 
-    });
+      }
 
-  }
+    context.runtime.replace(next)
+
+}
+
 }

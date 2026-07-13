@@ -1,12 +1,20 @@
-import { PluginDecision } from "src/core/plugins/contracts/plugin-decision.interface";
-import { ExecutionFrame } from "./execution-frame.interface";
+
+
+import {
+PluginDecision
+}
+from 'src/core/plugins/contracts/plugin-decision.interface';
+import { ExecutionSession } from '../context/execution-context.class';
 
 export interface PluginExecutor {
 
   execute(
-    frame: ExecutionFrame
+
+    context:
+      ExecutionSession
+
   ): Promise<
-    PluginDecision
-  >;
+      PluginDecision
+    >;
 
 }

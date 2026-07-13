@@ -1,5 +1,6 @@
 import { NodeRuntimeState } from "src/core/flow/runtime/state/node-runtime-state";
 import { SceneRuntimeState } from "src/core/flow/runtime/state/scene-runtime-state";
+import { GuardRequest } from "src/core/guards/contracts/guard-request.interface";
 import { SceneTransition } from "src/graph/contracts/scene-transition.interface";
 
 export interface PluginDecision {
@@ -23,4 +24,8 @@ export interface PluginDecision {
    * Domain-level completion signals
    */
   completedNodes?: string[];
+
+  /** guards  */
+
+  guards?: readonly GuardRequest[]
 }

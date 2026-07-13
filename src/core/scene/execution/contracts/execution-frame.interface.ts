@@ -10,12 +10,16 @@ export interface ExecutionFrame {
   executionId: string;
 
   flowId: string;
+    
+  flowInstanceId:string;
+
+  pluginId:string;
+
+  graphVersion:string;
 
   event: SceneEvent;
 
   state: Readonly<FlowRuntimeState>;
-
-  guards: Readonly<Record<string, unknown>>;
 
   mode:ExecutionMode;
 

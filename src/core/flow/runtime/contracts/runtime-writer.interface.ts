@@ -1,14 +1,19 @@
+
+
 import { FlowRuntimeState }
 from '../state/flow-runtime-state';
-import { FlowRuntimeStatePatch } from './runtime-state-patch.interface';
+import { RuntimeMutation } from '../types/runtime-mutation.type';
 
 export interface RuntimeWriter {
 
-  update(
-    state:
-    FlowRuntimeState
-  ): Promise<void>;
+  apply(
 
-  updatePatch(patch:FlowRuntimeStatePatch)
+    mutation:
+      RuntimeMutation
+
+  ): Promise<
+   
+    void
+  >;
 
 }

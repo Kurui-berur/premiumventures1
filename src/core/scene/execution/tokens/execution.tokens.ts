@@ -54,3 +54,33 @@ Symbol(
 
 export const DECISION_PATCH_EXECUTOR =
 Symbol('DECISION_PATCH_EXECUTOR');
+
+export const
+EXECUTION_DEDUPLICATOR =
+Symbol(
+'EXECUTION_DEDUPLICATOR'
+);
+
+export const
+EXECUTION_ID_GENERATOR =
+Symbol(
+'EXECUTION_ID_GENERATOR'
+);
+
+export const PLUGIN_PIPELINE =
+Symbol(
+'PLUGIN_PIPELINE'
+);
+export const PLUGIN_REGISTRY =
+Symbol(
+'PLUGIN_REGISTRY'
+);
+
+export const MIDDLEWARE_CHAIN =
+Symbol(
+'MIDDLEWARE_CHAIN'
+);
+export const PLUGIN_MIDDLEWARE=
+Symbol(
+'PLUGIN_MIDDLEWARE'
+);

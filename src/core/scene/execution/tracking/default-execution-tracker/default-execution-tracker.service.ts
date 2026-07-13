@@ -5,6 +5,7 @@ import { PluginDecision } from 'src/core/plugins/contracts/plugin-decision.inter
 import { ExecutionFrame } from '../../contracts/execution-frame.interface';
 import type { ExecutionJournal } from '../../contracts/execution-journal.interface';
 import { EXECUTION_JOURNAL } from '../../tokens/execution.tokens';
+import { ExecutionContext } from '../../context/execution-context.class';
 
 @Injectable()
 export class DefaultExecutionTrackerService implements ExecutionTracker {
@@ -46,8 +47,10 @@ event
 }
 
 async frame(
-frame
+context: ExecutionContext
 ){
+   const frame =
+   context.frame;
 
 await this.journal.record({
 
@@ -71,9 +74,11 @@ frame
 }
 
 async decision(
-frame,
-decision
+context: ExecutionContext
 ){
+   const frame = context.frame;
+
+const decision = context.state.requireDecision();
 
 await this.journal.record({
 

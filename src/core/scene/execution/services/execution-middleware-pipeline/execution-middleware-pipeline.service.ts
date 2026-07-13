@@ -1,38 +1,68 @@
 import { Injectable } from '@nestjs/common';
-import { ExecutionMiddleware } from '../../contracts/execution-middleware.interface';
-import { Handler } from 'src/core/events/types/event-handler.type';
-import { ExecutionFrame } from '../../contracts/execution-frame.interface';
+
+import {
+ExecutionMiddleware
+}
+from '../../contracts/execution-middleware.interface';
+
+import {
+ExecutionContext
+}
+from '../../contracts/execution-context.interface';
 
 @Injectable()
-export class ExecutionMiddlewarePipelineService  {
+export class ExecutionMiddlewarePipelineService {
 
+  async execute<TResult>(
 
- async execute<TResult>(
-    middlewares:readonly ExecutionMiddleware[],
+    middlewares:
+      readonly ExecutionMiddleware[],
 
-    frame:ExecutionFrame,
+    context:
+      ExecutionContext,
 
-    handler:() => Promise<TResult> ): Promise<TResult>{
+    handler:
+      () => Promise<TResult>
 
-       const invoke =async (index:number): Promise<TResult>=>{
+  ): Promise<TResult> {
 
-            if(index>=middlewares.length){
+    const invoke =
 
-              return handler();
-             }
+      async (
+        index: number
+      ): Promise<TResult> => {
 
-            return middlewares[index ] .execute(
-                 frame,
-                  async()=>{
-                     return invoke( index+1);
-         }
+        if (
+          index >=
+          middlewares.length
+        ) {
+
+          return handler();
+
+        }
+
+        return middlewares[
+          index
+        ].execute(
+
+          context,
+
+          async () => {
+
+            return invoke(
+
+              index + 1
 
             );
-        };
-        return invoke(0);
+
+          }
+
+        );
+
+      };
+
+    return invoke(0);
+
+  }
 
 }
-
-
-}
-
