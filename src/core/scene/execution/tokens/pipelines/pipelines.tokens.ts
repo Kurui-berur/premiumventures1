@@ -1,3 +1,7 @@
+export const EXECUTION_PIPELINE=Symbol(
+    'EXECUTION_PIPELINE'
+)
+
 export const RUNTIME_PIPELINE=Symbol(
     "RUNTIME_PIPELINE"
 )

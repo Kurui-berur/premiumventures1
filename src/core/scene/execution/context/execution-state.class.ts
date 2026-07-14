@@ -9,6 +9,8 @@ import {
 import {
   RuntimeMutation
 } from 'src/core/flow/runtime/types/runtime-mutation.type';
+import { FlowRuntimeStatePatch } from 'src/core/flow/runtime/contracts/runtime-state-patch.interface';
+import { RuntimeDiff } from './runtime/runtime-diff.class';
 
 export class ExecutionState {
 
@@ -16,7 +18,7 @@ export class ExecutionState {
 
   private decision?: PluginDecision;
 
-  private runtimeMutation?: RuntimeMutation;
+  private runtimeDiff?: RuntimeDiff;
 
   recordPlugin(
     plugin: FlowPlugin
@@ -34,13 +36,13 @@ export class ExecutionState {
 
   }
 
-  recordRuntimeMutation(
-    runtimeMutation: RuntimeMutation
-  ): void {
+recordRuntimeDiff(
+  runtimeDiff: RuntimeDiff
+): void {
 
-    this.runtimeMutation = runtimeMutation;
+  this.runtimeDiff = runtimeDiff;
 
-  }
+}
 
   getPlugin():
     FlowPlugin | undefined {
@@ -56,12 +58,12 @@ export class ExecutionState {
 
   }
 
-  getRuntimeMutation():
-    RuntimeMutation | undefined {
+getRuntimeDiff():
+  RuntimeDiff | undefined {
 
-    return this.runtimeMutation;
+  return this.runtimeDiff;
 
-  }
+}
 
   requirePlugin():
     FlowPlugin {
@@ -93,19 +95,18 @@ export class ExecutionState {
 
   }
 
-  requireRuntimeMutation():
-    RuntimeMutation {
+ requireRuntimeDiff():
+  RuntimeDiff {
 
-    if (!this.runtimeMutation) {
+  if (!this.runtimeDiff) {
 
-      throw new Error(
-        'ExecutionState does not contain a RuntimeMutation.'
-      );
-
-    }
-
-    return this.runtimeMutation;
+    throw new Error(
+      'ExecutionState does not contain a RuntimeDiff.'
+    );
 
   }
 
+  return this.runtimeDiff;
+
+}
 }

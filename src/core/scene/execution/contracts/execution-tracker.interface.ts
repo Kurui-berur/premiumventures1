@@ -65,6 +65,14 @@ patchFailed(
   context:ExecutionSession,
   error:unknown
 )
+//runtimediff
+runtimeDiffStarted(context:ExecutionSession)
+runtimeDiffCompleted(context:ExecutionSession)
+runtimeDiffFailed(context:ExecutionSession,
+  error:unknown
+  
+)
+
 //runtime pipeline
 
 runtimeStarted(context:ExecutionSession)
@@ -79,6 +87,15 @@ transitionCompleted(context:ExecutionSession)
 transitionFailed(context:ExecutionSession,
   error:unknown
   
+)
+//executioncommmitpipelime
+executionCommitStarted(context:ExecutionSession)
+
+executionCommitCompleted(context:ExecutionSession)
+
+executionCommitFailed(context:ExecutionSession,
+  error:unknown
+
 )
 
 

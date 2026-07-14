@@ -1,3 +1,3 @@
 import { ExecutionPipeline } from "./execution-pipeline.interface";
 
-export interface RuntimePipeline extends ExecutionPipeline{}
+export interface ExecutionCommitPipeline extends ExecutionPipeline{}

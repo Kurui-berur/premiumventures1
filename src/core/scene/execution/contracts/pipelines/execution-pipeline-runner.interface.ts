@@ -1,13 +1,9 @@
 import { ExecutionSession } from "../../context/execution-context.class";
 
-export interface ERuntimeMiddleware {
+export interface ExecutionPipelineRunner {
 
   execute(
-
-    context: ExecutionSession,
-
-    next: () => Promise<void>
-
+    context: ExecutionSession
   ): Promise<void>;
 
 }

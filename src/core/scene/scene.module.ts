@@ -33,6 +33,9 @@ import { DefaultDecisionPatchPipelineService } from './executionpipelines/defaul
 import { DefaultDecisionPatchPipelineService } from './execution/pipelines/default-decision-patch-pipeline/default-decision-patch-pipeline.service';
 import { DefaultRuntimePipelineService } from './execution/pipelines/default-runtime-pipeline/default-runtime-pipeline.service';
 import { DefaultTransitionPipelineService } from './execution/pipelines/default-transition-pipeline/default-transition-pipeline.service';
+import { DefaultRuntimeDiffPipelineService } from './execution/pipelines/default-runtime-diff-pipeline/default-runtime-diff-pipeline.service';
+import { DefaultExecutionCommitPipelineService } from './execution/pipelines/default-execution-commit-pipeline/default-execution-commit-pipeline.service';
+import { DefaultExecutionPipelineRunnerService } from './execution/runners/default-execution-pipeline-runner/default-execution-pipeline-runner.service';
 @Module({
   imports: [LogsModule,PluginsModule],
   providers: [
@@ -218,7 +221,7 @@ DefaultPluginPipelineService,
 DefaultPluginPipelineService,
 
 DefaultMiddlewareChainService,
-, DefaultExecutionContextFactoryService, ExecutionTimingMiddlewareService, DefaultDecisionPatchPipelineService, DefaultRuntimePipelineService, DefaultTransitionPipelineService,
+, DefaultExecutionContextFactoryService, ExecutionTimingMiddlewareService, DefaultDecisionPatchPipelineService, DefaultRuntimePipelineService, DefaultTransitionPipelineService, DefaultRuntimeDiffPipelineService, DefaultExecutionCommitPipelineService, DefaultExecutionPipelineRunnerService,
 
 ]
 })
