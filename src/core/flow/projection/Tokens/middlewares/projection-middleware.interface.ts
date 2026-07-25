@@ -1,0 +1,2 @@
+export const PROJECTION_MIDDLEWARE =
+    Symbol('PROJECTION_MIDDLEWARE');

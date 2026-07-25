@@ -3,7 +3,7 @@ import { RuntimeTracker } from '../../contracts/runtime-tracker.interface';
 import { FlowRuntimeState } from '../../state/flow-runtime-state';
 import { RUNTIME_JOURNAL, RUNTIME_READER } from '../../tokens/runtime-tokens';
 import type { RuntimeJournal } from '../../contracts/runtime-journal.interface';
-import type { RuntimeReader } from '../../contracts/runtime-reader.interface';
+import type { RuntimeReader } from '../../contracts/runtime-state-reader.interface';
 import { FlowRuntimeStatePatch } from '../../contracts/runtime-state-patch.interface';
 
 @Injectable()

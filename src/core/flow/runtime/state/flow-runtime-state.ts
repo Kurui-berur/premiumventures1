@@ -3,7 +3,7 @@ import { SceneRuntimeState } from "./scene-runtime-state";
 
 export interface FlowRuntimeState {
 
-  currentSceneId: string | null;
+  currentSceneId: string ;
 
   activeNodeId: string | null;
 

@@ -9,34 +9,36 @@ import { FlowRuntimeStatePatch} from '../../contracts/runtime-state-patch.interf
 export class InMemoryFlowRuntimeStoreService implements RuntimeStore{
    
 
-    private current:FlowRuntimeState={
-
-        currentSceneId:null,
-
-        activeNodeId:null,
-
-        nodeStates:new Map(),
-
-        sceneStates:new Map()
-
-    }
+private current: FlowRuntimeState | null = null;
 
   
     
 
-    state(): Readonly<FlowRuntimeState> {
+state(): Readonly<FlowRuntimeState> {
 
-         return this.current
-
-
-        
+    if (!this.current) {
+        throw new Error(
+            'Runtime has not been initialized.'
+        );
     }
+
+    return this.current;
+
+}
+
+
     async replace(state: FlowRuntimeState): Promise<void> {
          
         this.current=structuredClone(state)
     }
 
+    
     async patch(patch: FlowRuntimeStatePatch) {
+          if (!this.current) {
+    throw new Error(
+      'Cannot patch runtime before it has been initialized.'
+    );
+  }
         this.current={
             ...this.current,
 

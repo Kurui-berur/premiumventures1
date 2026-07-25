@@ -1,0 +1,7 @@
+export const PROJECTION_RUNTIME_READER=Symbol(
+    'PROJECTION_RUNTIME_READER'
+)
+export const RUNTIME_STATE_READER =
+Symbol(
+'RUNTIME_READER'
+);

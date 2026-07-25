@@ -1,0 +1,2 @@
+export const PROJECTION_TRACKER =
+    Symbol('PROJECTION_TRACKER');

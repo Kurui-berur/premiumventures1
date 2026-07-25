@@ -12,7 +12,9 @@ export interface ExecutionTracker {
 
   event(event: SceneEvent): Promise<void>;
 
-  frame( context: ExecutionSession): Promise<void>;
+  frame( frame:ExecutionFrame): Promise<void>;
+
+  session(session:ExecutionSession):Promise<void>
 
   decision(context: ExecutionSession): Promise<void>;
 

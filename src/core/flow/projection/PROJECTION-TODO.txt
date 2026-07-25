@@ -1,0 +1,191 @@
+I think that's the right approach.
+
+Don't build them now.
+
+One of the strengths of your current architecture is that nothing depends on them yet. You can safely postpone them until you have a real use case.
+
+I'd leave yourself a design TODO like this:
+
+Projection Policies / Strategies TODO
+Goal
+
+Introduce a policy layer that determines which parts of a ProjectionGraph should participate in a projection, without changing the remainder of the projection pipeline.
+
+CompiledGraph
+        │
+        ▼
+ProjectionGraph
+        │
+        ▼
+ProjectionPolicy
+        │
+        ▼
+ProjectionCandidateNodeSet
+        │
+        ▼
+ProjectionNodeSet
+        │
+        ▼
+FlowView
+Planned abstraction
+export interface ProjectionPolicy {
+
+    project(
+
+        graph: ProjectionGraph,
+
+    ): Promise<ProjectionCandidateNodeSet>;
+
+}
+
+Responsibility
+
+Select candidate nodes.
+Never build indexes.
+Never build FlowView.
+Never access Angular.
+Never access runtime state directly.
+Produce only a ProjectionCandidateNodeSet.
+Initial policies
+1. FullProjectionPolicy
+
+Priority: High (default)
+
+Projects every reachable node.
+
+Use for:
+
+Normal application execution
+Current behavior
+2. PreviewProjectionPolicy
+
+Priority: High
+
+Projects only a subtree beginning from a selected scene or node.
+
+Use for:
+
+Flow designer
+Graph preview
+Documentation
+Unit testing individual branches
+
+Possible configuration:
+
+startSceneId: string
+
+or
+
+startNodeId: string
+3. PermissionProjectionPolicy
+
+Priority: Medium
+
+Filters nodes according to user permissions.
+
+Examples:
+
+Admin
+Teacher
+Student
+Guest
+4. FeatureFlagProjectionPolicy
+
+Priority: Medium
+
+Projects nodes only when corresponding feature flags are enabled.
+
+Examples:
+
+Experimental features
+Beta rollout
+A/B testing
+5. DeviceProjectionPolicy
+
+Priority: Low
+
+Projects different UI structures depending on device.
+
+Examples:
+
+Desktop
+Tablet
+Mobile
+6. LocalizationProjectionPolicy
+
+Priority: Low
+
+Projects country- or region-specific sections.
+
+Examples:
+
+M-Pesa
+PayPal
+Credit Card
+7. AccessibilityProjectionPolicy
+
+Priority: Low
+
+Projects accessibility-specific nodes.
+
+Examples:
+
+Screen-reader instructions
+High-contrast components
+Simplified layouts
+8. WorkflowProjectionPolicy
+
+Priority: Low
+
+Projects only a selected workflow inside a larger graph.
+
+Useful for:
+
+Modular workflows
+Embedded flows
+Subflow rendering
+Composition (Future)
+
+Allow multiple policies to execute together.
+
+Example:
+
+CompiledGraph
+
+↓
+
+FullProjectionPolicy
+
+↓
+
+PermissionProjectionPolicy
+
+↓
+
+FeatureFlagProjectionPolicy
+
+↓
+
+ProjectionCandidateNodeSet
+
+Each policy progressively narrows the candidate node set.
+
+Design rules
+Policies must never modify the compiled graph.
+Policies must return immutable candidate sets.
+Policies must remain independent of Angular.
+Policies must never construct FlowView.
+Policies must not depend on execution plugins.
+The rest of the projection pipeline (ProjectionNodeSet → FlowView) should remain unchanged regardless of which policy is used.
+When to implement
+
+Implement this layer only when one of these requirements appears:
+
+Graph preview or designer.
+Multiple projection modes.
+Role-based or permission-based rendering.
+Feature flags affecting the UI.
+Device-specific or localized projections.
+Need to render only a subtree or subflow.
+
+Until then, keep using the equivalent of a FullProjectionPolicy implicitly. Your current projection pipeline already behaves as if this default policy exists, so introducing the abstraction later should require minimal changes.

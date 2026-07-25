@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { RuntimeSnapshotReader } from '../../contracts/runtime-snapshot-reader.interface';
 import { FlowRuntimeState } from '../../state/flow-runtime-state';
 import { RUNTIME_READER } from '../../tokens/runtime-tokens';
-import type { RuntimeReader } from '../../contracts/runtime-reader.interface';
+import type { RuntimeReader } from '../../contracts/runtime-state-reader.interface';
 
 @Injectable()
 export class DefaultRuntimeSnapshotReaderService implements RuntimeSnapshotReader {

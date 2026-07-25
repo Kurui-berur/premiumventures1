@@ -8,8 +8,11 @@ export interface ExecutionJournal {
   /**
  * Read execution history
  */
-entries():Promise<readonly EngineLogEntry[]>;
+  entries():Promise<readonly EngineLogEntry[]>;
 
 
-entriesAfter( timestamp: number, limit: number ): Promise< readonly EngineLogEntry[] >;
+
+entriesAfter( timestamp: 
+  number, limit: number ): 
+  Promise<readonly EngineLogEntry[] >;
 }

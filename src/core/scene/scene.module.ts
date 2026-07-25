@@ -27,7 +27,7 @@ import { DefaultPluginRegistryService } from './execution/services/default-plugi
 import { PluginsModule } from '../plugins/plugins.module';
 import { DefaultPluginPipelineService } from './execution/plugins/services/default-plugin-pipeline/default-plugin-pipeline.service';
 import { DefaultMiddlewareChainService } from './execution/middlewares/services/default-middleware-chain/default-middleware-chain.service';
-import { DefaultExecutionContextFactoryService } from './execution/context/factory/default-execution-context-factory/default-execution-context-factory.service';
+import { DefaultExecutionContextFactoryService } from './execution/context/factory/default-execution-session-factory/default-execution-session-factory.service';
 import { ExecutionTimingMiddlewareService } from './execution/middlewares/timing/execution-timing-middleware/execution-timing-middleware.service';
 import { DefaultDecisionPatchPipelineService } from './executionpipelines/default-decision-patch-pipeline/default-decision-patch-pipeline.service';
 import { DefaultDecisionPatchPipelineService } from './execution/pipelines/default-decision-patch-pipeline/default-decision-patch-pipeline.service';
@@ -36,6 +36,10 @@ import { DefaultTransitionPipelineService } from './execution/pipelines/default-
 import { DefaultRuntimeDiffPipelineService } from './execution/pipelines/default-runtime-diff-pipeline/default-runtime-diff-pipeline.service';
 import { DefaultExecutionCommitPipelineService } from './execution/pipelines/default-execution-commit-pipeline/default-execution-commit-pipeline.service';
 import { DefaultExecutionPipelineRunnerService } from './execution/runners/default-execution-pipeline-runner/default-execution-pipeline-runner.service';
+import { EXECUTION_SESSION_FACTORY } from './execution/tokens/factories/execution-factories.tokens';
+import { DefaultExecutionMetadataFactoryService } from './execution/context/factory/default-execution-metadata-factory/default-execution-metadata-factory.service';
+import { DefaultExecutionStateFactoryService } from './execution/context/factory/default-execution-state-factory/default-execution-state-factory.service';
+import { DefaultExecutionRuntimeFactoryService } from './execution/context/factory/default-execution-runtime-factory/default-execution-runtime-factory.service';
 @Module({
   imports: [LogsModule,PluginsModule],
   providers: [
@@ -189,6 +193,10 @@ EXECUTION_TRACKER,
 useExisting:
 DefaultExecutionTrackerService
 },
+{
+  provide: EXECUTION_SESSION_FACTORY,
+  useClass: DefaultExecutionSessionFactory
+}
 
 DefaultSceneActivatorService,
 
@@ -221,7 +229,7 @@ DefaultPluginPipelineService,
 DefaultPluginPipelineService,
 
 DefaultMiddlewareChainService,
-, DefaultExecutionContextFactoryService, ExecutionTimingMiddlewareService, DefaultDecisionPatchPipelineService, DefaultRuntimePipelineService, DefaultTransitionPipelineService, DefaultRuntimeDiffPipelineService, DefaultExecutionCommitPipelineService, DefaultExecutionPipelineRunnerService,
+, DefaultExecutionContextFactoryService, ExecutionTimingMiddlewareService, DefaultDecisionPatchPipelineService, DefaultRuntimePipelineService, DefaultTransitionPipelineService, DefaultRuntimeDiffPipelineService, DefaultExecutionCommitPipelineService, DefaultExecutionPipelineRunnerService, DefaultExecutionMetadataFactoryService, DefaultExecutionStateFactoryService, DefaultExecutionRuntimeFactoryService,
 
 ]
 })

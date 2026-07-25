@@ -29,7 +29,10 @@ export class DefaultRuntimeRecoveryCoordinatorService implements RuntimeRecovery
     const checkpoint=await this.checkpoints.latest()
 
     if(checkpoint){
-        await this.runtime_writer.update(checkpoint)
+        await this.runtime_writer.apply({
+            type:'REPLACE',
+            state:checkpoint
+        })
     }
          
     const logs=await this.journal.entries()
@@ -37,12 +40,22 @@ export class DefaultRuntimeRecoveryCoordinatorService implements RuntimeRecovery
     for(const entry of logs){
         if (entry.stage==='STATE_REPLACED'){
 
-            await this.runtime_writer.update(entry.payload as FlowRuntimeState)
+            await this.runtime_writer.apply({ 
+                 type: 'REPLACE', 
+                 
+                 state: entry.payload as FlowRuntimeState
+
+            });
         }
 
         if(entry.stage==='PATCH_APPLIED'){
 
-            await this.runtime_writer.updatePatch(entry.payload as FlowRuntimeStatePatch)
+            await this.runtime_writer.apply({
+                type: 'PATCH',
+                
+                patch: entry.payload as FlowRuntimeStatePatch
+
+});
         }
     }
 

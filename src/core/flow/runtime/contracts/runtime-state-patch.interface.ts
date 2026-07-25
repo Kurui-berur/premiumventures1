@@ -7,7 +7,7 @@ from '../state/scene-runtime-state';
 export interface FlowRuntimeStatePatch {
 
   currentSceneId?:
-    string | null;
+    string;
 
   activeNodeId?:
     string | null;

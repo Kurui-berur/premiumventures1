@@ -1,9 +1,13 @@
+import { ProjectionSession } from "../../context/projection-session.interface";
+import { ProjectionScope } from "../../types/projection-scope.types";
+
 export interface ProjectionPipeline {
 
+  readonly scope:
+    ProjectionScope;
+
   execute(
-
-    flowInstanceId: string
-
+    session: ProjectionSession
   ): Promise<void>;
 
 }

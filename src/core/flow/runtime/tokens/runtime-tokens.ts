@@ -2,10 +2,6 @@ export const RUNTIME_SNAPSHOT =
 Symbol(
 'RUNTIME_SNAPSHOT'
 );
-export const RUNTIME_READER =
-Symbol(
-'RUNTIME_READER'
-);
 
 export const RUNTIME_WRITER =
 Symbol(
@@ -65,3 +61,4 @@ RUNTIME_CHANGE_DETECTOR =
 Symbol(
 'RUNTIME_CHANGE_DETECTOR'
 );
+

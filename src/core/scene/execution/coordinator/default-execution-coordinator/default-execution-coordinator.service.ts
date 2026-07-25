@@ -10,8 +10,6 @@ import {
   EXECUTION_FRAME_FACTORY,
   EXECUTION_MIDDLEWARE,
   EXECUTION_TRACKER,
-  PLUGIN_EXECUTION_PIPELINE,
-  TRANSITION_EXECUTOR
 } from '../../tokens/execution.tokens';
 
 import type {
@@ -34,9 +32,6 @@ import type {
   TransitionExecutor
 } from '../../contracts/transition-executor.interface';
 
-import type {
-  PluginExecutionPipeline
-} from '../../contracts/plugin-pipeline.interface';
 
 import {
   ExecutionMiddleware
@@ -58,10 +53,11 @@ import type {
   RuntimeCoordinator
 } from 'src/core/flow/runtime/contracts/runtime-coordinator.interface';
 
-import {
-  ExecutionContext
-} from '../../context/execution-context.class';
 import { RUNTIME_PIPELINE } from '../../tokens/pipelines/pipelines.tokens';
+import { EXECUTION_PIPELINE_RUNNER } from '../../tokens/runners/runners.tokens';
+import type { ExecutionPipelineRunner } from '../../contracts/pipelines/execution-pipeline-runner.interface';
+import { EXECUTION_SESSION_FACTORY } from '../../tokens/factories/execution-factories.tokens';
+import type { ExecutionSessionFactory } from '../../context/factory/execution-session-factory';
 
 @Injectable()
 export class DefaultExecutionCoordinatorService
@@ -69,56 +65,20 @@ implements ExecutionCoordinator {
 
   constructor(
 
-    @Inject(
-      EXECUTION_FRAME_FACTORY
-    )
-    private readonly frames:
-      ExecutionFrameFactory,
+    @Inject(EXECUTION_FRAME_FACTORY)
+    private readonly frames: ExecutionFrameFactory,
 
-    @Inject(
-      EXECUTION_TRACKER
-    )
-    private readonly tracker:
-      ExecutionTracker,
+    @Inject(EXECUTION_TRACKER)
+    private readonly tracker: ExecutionTracker,
 
-    @Inject(
-      PLUGIN_EXECUTION_PIPELINE
-    )
-    private readonly plugins:
-      PluginExecutionPipeline,
+    @Inject(EXECUTION_DEDUPLICATOR)
+    private readonly deduplicator: ExecutionDeduplicator,
 
-    @Inject(
-      EXECUTION_DEDUPLICATOR
-    )
-    private readonly deduplicator:
-      ExecutionDeduplicator,
+    @Inject(EXECUTION_SESSION_FACTORY)
+    private readonly sessions: ExecutionSessionFactory,
 
-    @Inject(
-      EXECUTION_MIDDLEWARE
-    )
-    private readonly middlewares:
-      readonly ExecutionMiddleware[],
-
-    @Inject(
-      DECISION_PATCH_EXECUTOR
-    )
-    private readonly patches:
-      DecisionPatchExecutor,
-
-    @Inject(
-      TRANSITION_EXECUTOR
-    )
-    private readonly transitions:
-      TransitionExecutor,
-
-    @Inject(
-      RUNTIME_PIPELINE
-    )
-    private readonly runtime:
-      RuntimeCoordinator,
-
-    private readonly pipeline:
-      ExecutionMiddlewarePipelineService
+    @Inject(EXECUTION_PIPELINE_RUNNER)
+    private readonly pipelines: ExecutionPipelineRunner
 
   ) {}
 
@@ -126,9 +86,7 @@ implements ExecutionCoordinator {
     event: SceneEvent
   ): Promise<void> {
 
-    await this.tracker.event(
-      event
-    );
+     await this.tracker.event(event);
 
     const frame =this.frames.create(event);
 
@@ -140,83 +98,18 @@ implements ExecutionCoordinator {
       return;
     }
 
-    await this.tracker.frame(
-      frame
+    await this.tracker.frame(frame);
+
+    const session = this.sessions.create(frame);
+
+    await this.tracker.session(session)
+
+    await this.pipelines.execute(
+      session
     );
-
-    const context =
-      new ExecutionContext(
-        frame
-      );
-
-    await this.pipeline.execute(
-
-      this.middlewares,
-
-      context,
-
-      async () => {
-
-        await this.plugins.execute(
-          context
-        );
-
-      }
-
-    );
-
-    await this.tracker.decision(
-      context
-    );
-
-    await this.patches.execute(
-      context
-    );
-
-    const mutation =
-      context.state.getRuntimeMutation();
-
-    if (mutation) {
-
-      await this.runtime.apply(
-
-        context.frame.flowInstanceId,
-
-        mutation
-
-      );
-
-    }
-
-    // Transition pipeline has not yet been migrated.
-    // Leave this unchanged until the next phase.
-
-    const transition =
-
-      await this.transitions.execute(
-
-        context.frame,
-
-        context.state.requireDecision()
-
-      );
-
-    if (transition) {
-
-      await this.runtime.apply(
-
-        context.frame.flowInstanceId,
-
-        transition
-
-      );
-
-    }
 
     await this.deduplicator.mark(
-
-      context.frame.executionId
-
+      frame.executionId
     );
 
   }
