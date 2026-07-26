@@ -5,9 +5,10 @@ import { FlowSceneView } from '../../contracts/nodes/flow-scene-view.interface';
 
 export class DefaultFlowView implements FlowView{
     readonly rootSceneId: string;
-    readonly sceneIds: readonly string[];
-    readonly scenes: Readonly<Record<string, FlowSceneView>>;
-    readonly nodes: Readonly<Record<string, FlowNode>>;
+
+    private readonly orderedSceneIds:readonly string[];
+    private readonly scenes: Readonly<Record<string, FlowSceneView>>;
+    private readonly nodes: Readonly<Record<string, FlowNode>>;
     constructor(
           rootSceneId: string,
 
@@ -28,7 +29,7 @@ export class DefaultFlowView implements FlowView{
            this.rootSceneId =
             rootSceneId;
 
-        this.sceneIds =
+        this.orderedSceneIds =
 
             Object.freeze([
                 ...sceneIds,
@@ -51,5 +52,14 @@ export class DefaultFlowView implements FlowView{
             });
 
         Object.freeze(this);
+    }
+    sceneIds(): readonly string[] {
+        return this.orderedSceneIds
+    }
+    scene(sceneId: string): FlowSceneView | undefined {
+        return this.scenes[sceneId]
+    }
+    node(nodeId: string): FlowNode | undefined {
+        return this.nodes[nodeId]
     }
 }

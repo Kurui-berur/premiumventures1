@@ -1,0 +1,3 @@
+export const COMPOSITION_PIPELINE=Symbol(
+    'COMPOSITION_PIPELINE'
+)

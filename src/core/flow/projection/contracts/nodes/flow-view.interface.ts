@@ -5,19 +5,15 @@ export interface FlowView {
 
     readonly rootSceneId: string;
 
-    readonly sceneIds:
+    sceneIds():
         readonly string[];
 
-    readonly scenes:
-        Readonly<Record<
-            string,
-            FlowSceneView
-        >>;
+    scene(
+        sceneId: string,
+    ): FlowSceneView | undefined;
 
-    readonly nodes:
-        Readonly<Record<
-            string,
-            FlowNode
-        >>;
+    node(
+        nodeId: string,
+    ): FlowNode | undefined;
 
 }

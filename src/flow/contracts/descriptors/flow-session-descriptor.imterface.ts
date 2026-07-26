@@ -3,18 +3,10 @@ import { FlowRuntimeState } from "src/core/flow/runtime/state/flow-runtime-state
 
 export interface FlowSessionDescriptor {
 
-    executionId: string;
+    readonly runtime:
+        Readonly<FlowRuntimeState>;
 
-    flowId: string;
-
-    flowInstanceId: string;
-
-    graphVersion: string;
-
-    runtime:
-        FlowRuntimeState;
-
-    view:
+    readonly view:
         FlowView;
 
 }

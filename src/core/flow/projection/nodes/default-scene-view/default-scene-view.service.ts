@@ -1,16 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { FlowSceneView } from '../../contracts/nodes/flow-scene-view.interface';
 
+
 export class DefaultSceneView implements FlowSceneView {
+
    readonly sceneId: string;
-    readonly nodeIds: readonly string[];
+   private readonly orderedNodeIds:readonly string[];
+   
     constructor(
         sceneId: string,
         nodeIds: readonly string[],
     ){
         this.sceneId=sceneId
-        this.nodeIds=Object.freeze([...nodeIds])
+        this.orderedNodeIds=Object.freeze([...nodeIds])
         Object.freeze(this)
 
+    }
+    nodeIds(): readonly string[] {
+        return this.orderedNodeIds
     }
 }
