@@ -24,7 +24,7 @@ RuntimeMutation
 }
 from
 'src/core/flow/runtime/types/runtime-mutation.type';
-import {  ExecutionSession } from '../../../context/execution-context.class';
+import {  ExecutionSession } from '../../../context/execution-session.class';
 
 @Injectable()
 export class DefaultDecisionPatchExecutorService

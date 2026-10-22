@@ -40,7 +40,7 @@ import {
 RuntimeMutation
 }
 from 'src/core/flow/runtime/types/runtime-mutation.type';
-import { ExecutionSession } from '../../context/execution-context.class';
+import { ExecutionSession } from '../../context/execution-session.class';
 
 @Injectable()
 export class DefaultTransitionExecutorService
@@ -71,7 +71,7 @@ context:ExecutionSession
 
     const runtime= context.runtime.current()
 
-    const decision=context.state.requireDecision()
+    const decision=context.state.pluginDecision.require()
 
     const transition = decision.transitions?.[0];
 

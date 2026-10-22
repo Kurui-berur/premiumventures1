@@ -1,13 +1,9 @@
 import { FlowRuntimeState }
 from '../state/flow-runtime-state';
 import { FlowRuntimeStatePatch } from './runtime-state-patch.interface';
+import { RuntimeStateReader } from './runtime-state-reader.interface';
 
-export interface RuntimeStore {
-
-  state():
-  Readonly<
-    FlowRuntimeState
-  >;
+export interface RuntimeStore extends RuntimeStateReader{
 
   replace(
     state:

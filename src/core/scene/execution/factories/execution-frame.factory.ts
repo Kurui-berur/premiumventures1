@@ -40,8 +40,6 @@ export class DefaultExecutionFrameFactory implements ExecutionFrameFactory {
 
         flowInstanceId:identity.flowInstanceId,
 
-        pluginId: identity.pluginId,
-
         graphVersion: identity.graphVersion,
 
         event,

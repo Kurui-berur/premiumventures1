@@ -29,6 +29,10 @@ import { InMemomryFlowRuntimeStorService } from './cor/flow/runtime/store/in-mem
 import { ApplicationModule } from './application/application.module';
 import { DefaultFlowApplicationServicesTsService } from './appplication/services/default-flow-application.services.ts/default-flow-application.services.ts.service';
 import { FlowModule } from './flow/flow.module';
+import { ObservabilityModule } from './observability/observability.module';
+import { EventSystemModule } from './event-system/event-system.module';
+import { DecisionModule } from './core/decision/decision.module';
+import { DecisionModule } from './src/core/decision/decision.module';
 import { DefaultGuardRegistryService } from './core/guards/services/default-guard-registry/default-guard-registry.service';
 import { DefaultPluginRegistryService } from './plugins/services/default-plugin-registry/default-plugin-registry.service';
 import { DefaultFlowLoaderService } from './default-flow-loader/default-flow-loader.service';
@@ -52,7 +56,7 @@ import { FlowModule } from './flow/flow.module';
   database: 'premiumventures',
   autoLoadEntities: true,
   synchronize: true, // dev only
-}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule, RuntimeEngineModule, GraphModule, CompilerModule, RedisModule, PluginsModule, SceneModule, InfrastructureModule, ApplicationModule,],
+}), OtpModule, TokenModule, PaymentModule, MlOchestrationModule, RuntimeEngineModule, GraphModule, CompilerModule, RedisModule, PluginsModule, SceneModule, InfrastructureModule, ApplicationModule, DecisionModule, EventSystemModule, ObservabilityModule,],
   controllers: [AppController],
   providers: [AppService, InMemomryFlowRuntimeStorService, DefaultFlowApplicationServicesTsService, DefaultFlowLoaderService, DefaultPluginRegistryService, DefaultGuardRegistryService]
 export class AppModule {}

@@ -16,6 +16,11 @@ import { DefaultRuntimeViewProviderService } from './services/default-runtime-vi
 import { DefaultRuntimeChangeDetectorService } from './services/default-runtime-change-detector/default-runtime-change-detector.service';
 import { DefaultRuntimeReaderService } from './readers/default-runtime-state-reader/default-runtime-reader.service';
 import { DefaultProjectionRuntimeService } from './readers/default-projection-runtime/default-projection-runtime.service';
+import { DefaultRuntimeStateResolverService } from './resolvers/default-runtime-state-resolver/default-runtime-state-resolver.service';
+import { DefaultRuntimeStoreRegistryService } from './registry/default-runtime-store-registry/default-runtime-store-registry.service';
+import { DefaultRuntimeStoreFactoryService } from './factories/default-runtime-store-factory/default-runtime-store-factory.service';
+import { DefaultRuntimeInitializerService } from './initializer/default-runtime-initializer/default-runtime-initializer.service';
+import { DefaultRuntimeResolutionPipelineService } from './pipelines/default-runtime-resolution-pipeline/default-runtime-resolution-pipeline.service';
 
 @Module({
   providers: [
@@ -146,6 +151,11 @@ DefaultRuntimeRecoveryCoordinatorService,
 DefaultRuntimeViewProviderService,
 DefaultRuntimeChangeDetectorService,
 DefaultProjectionRuntimeService,
+DefaultRuntimeStateResolverService,
+DefaultRuntimeStoreRegistryService,
+DefaultRuntimeStoreFactoryService,
+DefaultRuntimeInitializerService,
+DefaultRuntimeResolutionPipelineService,
 
         
        

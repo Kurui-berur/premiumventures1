@@ -1,4 +1,4 @@
-import { ExecutionSession } from "../../context/execution-context.class";
+import { ExecutionSession } from "../../context/execution-session.class";
 import { ExecutionScope } from "../../types/execution-scope.type";
 
 export interface ExecutionPipeline {

@@ -6,7 +6,7 @@ import type { MiddlewareChain } from "../../contracts/middlewares/middleware-cha
 import { DecisionPatchPipeline } from "../../contracts/pipelines/decision-patch-pipeline.interface";
 import { DECISION_PATCH_EXECUTOR, EXECUTION_TRACKER, MIDDLEWARE_CHAIN } from "../../tokens/execution.tokens";
 import { DECISION_PATCH_MIDDLEWARE } from "../../tokens/middlewares/tokens-middlewares";
-import { ExecutionSession } from "../../context/execution-context.class";
+import { ExecutionSession } from "../../context/execution-session.class";
 import { ExecutionScope } from "../../types/execution-scope.type";
 
 

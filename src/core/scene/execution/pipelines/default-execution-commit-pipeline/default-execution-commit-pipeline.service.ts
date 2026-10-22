@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ExecutionCommitPipeline } from '../../contracts/pipelines/execution-commit-pipeline.interface';
-import { ExecutionSession } from '../../context/execution-context.class';
+import { ExecutionSession } from '../../context/execution-session.class';
 import { ExecutionScope } from '../../types/execution-scope.type';
 import { EXECUTION_TRACKER, MIDDLEWARE_CHAIN } from '../../tokens/execution.tokens';
 import type { ExecutionTracker } from '../../contracts/execution-tracker.interface';
@@ -45,7 +45,7 @@ export class DefaultExecutionCommitPipelineService implements ExecutionCommitPip
 
                 async ()=>{
 
-                    const diff=context.state.requireRuntimeDiff()
+                    const diff=context.state.runtimeDiff.require()
 
                     if(diff.isEmpty()){
                         return

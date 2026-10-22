@@ -1,8 +1,9 @@
+import { ProjectionRequest } from "../contracts/initialization/projection-request.interface";
 import { ProjectionFrame } from "../frame/projection-frame.interface";
 
 
 export interface ProjectionFrameFactory {
 
-  create(): ProjectionFrame;
+  create( request: ProjectionRequest): ProjectionFrame;
 
 }

@@ -1,23 +1,49 @@
+/**
+ * A node is a structural element of a flow that represents a point,
+ *  thing, or operation within the flow's progression.
+ * is not UI component
+  database entity
+runtime state
+event
+decision result
+renderer
+compiled instruction
+ */
 export interface FlowNode {
-
-  id: string;
-
-  /**
-   * Pure semantic classification (optional for logic only)
-   */
-  type?: string;
+  readonly id: string;
 
   /**
-   * UI rendering contract (PRIMARY)
-   * 
+   * The structural category that determines the fundamental capabilities and constraints
+   *  of the node..
    */
+  readonly kind: FlowNodeKind;
 
+  /**
+   * Semantic meaning of the node.
+   * Not every node needs a semantic specialization.
+   */
+  readonly semantic?: string;
 
-  renderer: string;
+  /**
+   * Configuration specific to the node kind.
+   * A node's configuration must be valid for its kind.
 
-  content?: unknown;
+So we should eventually be able to reason:
 
-  sceneId: string;
+kind = DECISION
+       ↓
+config must satisfy DecisionNodeConfig
 
- // metadata?: Record<string, unknown>;
+rather than:
+
+config: any
+
+That will be important for authoring validation.
+   */
+  readonly config: FlowNodeConfig;
+
+  /**
+   * Scene this node belongs to.
+   */
+  readonly sceneId: string;
 }

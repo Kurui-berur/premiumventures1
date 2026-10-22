@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { EventHandler } from "../contracts/event-handlers.interface";
 import { SceneEvent } from "src/core/events/types/scene-event.type";
 import { EXECUTION_COORDINATOR, EXECUTION_QUEUE} from "../tokens/execution.tokens";
-import type { ExecutionCoordinator } from "../contracts/execution-coordinator.interface";
+import type { ExecutionCoordinator } from "../contracts/coordinator/execution-coordinator.interface";
 import type { ExecutionQueue } from "../contracts/execution-queue.interface";
 
 @Injectable()

@@ -6,7 +6,7 @@ import { RUNTIME_STATE_READER } from '../../tokens/readers/readers-tokens';
 import type { RuntimeStateReader } from '../../contracts/runtime-state-reader.interface';
 
 @Injectable()
-export class DefaultProjectionRuntimeService implements ProjectionRuntimeReader {
+export class DefaultProjectionRuntimeReader implements ProjectionRuntimeReader {
 
     constructor(
 

@@ -1,112 +1,20 @@
-import {
-  FlowPlugin
-} from 'src/core/plugins/contracts/flow-plugin.interface';
+import { IExecutionState } from "./contracts/IExecutionState.interface";
+import { DecisionNodeState } from "./state/decision-node-state.class";
+import { DecisionResultState } from "./state/decision-state-result.class";
+import { PluginState } from "./state/plugin-state.interface";
+import { RuntimeDiffState } from "./state/runtime-diff-state.class";
 
-import {
-  PluginDecision
-} from 'src/core/plugins/contracts/plugin-decision.interface';
 
-import {
-  RuntimeMutation
-} from 'src/core/flow/runtime/types/runtime-mutation.type';
-import { FlowRuntimeStatePatch } from 'src/core/flow/runtime/contracts/runtime-state-patch.interface';
-import { RuntimeDiff } from './runtime/runtime-diff.class';
+export class ExecutionState implements IExecutionState {
 
-export class ExecutionState {
+  readonly decision = new DecisionNodeState();
 
-  private plugin?: FlowPlugin;
+  readonly plugin = new PluginState();
 
-  private decision?: PluginDecision;
+  readonly decisionResult = new DecisionResultState();
 
-  private runtimeDiff?: RuntimeDiff;
+  readonly runtimeDiff = new RuntimeDiffState();
 
-  recordPlugin(
-    plugin: FlowPlugin
-  ): void {
+  readonly graph = new GraphState();
 
-    this.plugin = plugin;
-
-  }
-
-  recordDecision(
-    decision: PluginDecision
-  ): void {
-
-    this.decision = decision;
-
-  }
-
-recordRuntimeDiff(
-  runtimeDiff: RuntimeDiff
-): void {
-
-  this.runtimeDiff = runtimeDiff;
-
-}
-
-  getPlugin():
-    FlowPlugin | undefined {
-
-    return this.plugin;
-
-  }
-
-  getDecision():
-    PluginDecision | undefined {
-
-    return this.decision;
-
-  }
-
-getRuntimeDiff():
-  RuntimeDiff | undefined {
-
-  return this.runtimeDiff;
-
-}
-
-  requirePlugin():
-    FlowPlugin {
-
-    if (!this.plugin) {
-
-      throw new Error(
-        'ExecutionState does not contain a FlowPlugin.'
-      );
-
-    }
-
-    return this.plugin;
-
-  }
-
-  requireDecision():
-    PluginDecision {
-
-    if (!this.decision) {
-
-      throw new Error(
-        'ExecutionState does not contain a PluginDecision.'
-      );
-
-    }
-
-    return this.decision;
-
-  }
-
- requireRuntimeDiff():
-  RuntimeDiff {
-
-  if (!this.runtimeDiff) {
-
-    throw new Error(
-      'ExecutionState does not contain a RuntimeDiff.'
-    );
-
-  }
-
-  return this.runtimeDiff;
-
-}
 }

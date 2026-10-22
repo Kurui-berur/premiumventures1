@@ -1,0 +1,3 @@
+export const RUNTIME_STORE_REGISTRY=Symbol(
+    'RUNTIME_STORE_REGISTRY'
+)

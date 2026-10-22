@@ -5,7 +5,7 @@ import { SceneEventIntakeHandler } from '../../handlers/scene-event-intake.handl
 import type { ExecutionJournal } from '../../contracts/execution-journal.interface';
 import { EXECUTION_COORDINATOR, EXECUTION_JOURNAL, EXECUTION_TRACKER } from '../../tokens/execution.tokens';
 import type { ExecutionTracker } from '../../contracts/execution-tracker.interface';
-import type { ExecutionCoordinator } from '../../contracts/execution-coordinator.interface';
+import type { ExecutionCoordinator } from '../../contracts/coordinator/execution-coordinator.interface';
 
 @Injectable()
 export class DefaultExecutionQueueService implements ExecutionQueue{

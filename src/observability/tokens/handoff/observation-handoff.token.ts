@@ -1,0 +1,3 @@
+export const OBSERVATION_HANDOFF = Symbol(
+  'OBSERVATION_HANDOFF',
+);

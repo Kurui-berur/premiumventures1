@@ -4,8 +4,8 @@ import { FlowRuntimeState } from '../../state/flow-runtime-state';
 import type { RuntimeStore } from '../../contracts/runtime-store.interface';
 import { RUNTIME_STORE } from '../../tokens/runtime-tokens';
 
-@Injectable()
-export class DefaultRuntimeStateReaderService implements RuntimeStateReader {
+
+export class DefaultRuntimeStateReader implements RuntimeStateReader {
 
     constructor(
         @Inject(RUNTIME_STORE)

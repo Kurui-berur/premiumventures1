@@ -3,7 +3,7 @@ import { SceneEvent }
 from '../../../events/types/scene-event.type';
 
 import { ExecutionFrame }from './execution-frame.interface';
-import { ExecutionSession } from '../context/execution-context.class';
+import { ExecutionSession } from '../context/execution-session.class';
 
 
 

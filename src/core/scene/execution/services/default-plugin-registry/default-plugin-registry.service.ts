@@ -4,7 +4,7 @@ Injectable
 from '@nestjs/common';
 import { PluginRegistry } from '../../contracts/plugin-registry.interface';
 import { FlowPlugin } from 'src/core/plugins/contracts/flow-plugin.interface';
-import { ExecutionContext } from '../../context/execution-context.class';
+import { ExecutionSession } from '../../context/execution-session.class';
 
 @Injectable()
 export class DefaultPluginRegistryService implements PluginRegistry {
@@ -27,7 +27,7 @@ this.plugins.set(plugin.id,plugin);
 }
 
 async resolve(
-executionContext: ExecutionContext
+executionContext: ExecutionSession
 
 ){
  const pluginId =executionContext.frame.pluginId

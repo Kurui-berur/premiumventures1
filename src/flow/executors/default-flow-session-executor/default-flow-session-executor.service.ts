@@ -9,7 +9,7 @@ import { FLOW_SESSION_DESCRIPTOR_FACTORY, FLOW_SESSION_FACTORY } from 'src/flow/
 export class DefaultFlowSessionExecutorService implements FlowSessionExecutor{
     constructor(
         @Inject(FLOW_SESSION_DESCRIPTOR_FACTORY)
-        private readonly descriptorFactory:FlowSessionDescriptorFactory,
+        private readonly descriptorFactory:FlowSessi onDescriptorFactory,
 
         @Inject(FLOW_SESSION_FACTORY)
         private readonly flowSessionFactory:FlowSessionFactory,

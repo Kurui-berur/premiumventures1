@@ -1,4 +1,4 @@
-import { ExecutionSession } from "../../context/execution-context.class";
+import { ExecutionSession } from "../../context/execution-session.class";
 
 export interface ERuntimeMiddleware {
 

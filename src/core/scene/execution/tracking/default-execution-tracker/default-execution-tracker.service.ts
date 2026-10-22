@@ -5,7 +5,7 @@ import { PluginDecision } from 'src/core/plugins/contracts/plugin-decision.inter
 import { ExecutionFrame } from '../../contracts/execution-frame.interface';
 import type { ExecutionJournal } from '../../contracts/execution-journal.interface';
 import { EXECUTION_JOURNAL } from '../../tokens/execution.tokens';
-import { ExecutionContext } from '../../context/execution-context.class';
+import { ExecutionContext } from '../../context/execution-session.class';
 
 @Injectable()
 export class DefaultExecutionTrackerService implements ExecutionTracker {

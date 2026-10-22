@@ -1,4 +1,4 @@
-import { SceneTransitionTrigger } from "../types/scene-transition-trigger.types";
+import { SceneTransitionTrigger } from "./scene-transition-trigger.interface";
 
 export interface SceneTransition {
 

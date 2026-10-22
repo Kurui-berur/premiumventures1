@@ -40,6 +40,11 @@ import { EXECUTION_SESSION_FACTORY } from './execution/tokens/factories/executio
 import { DefaultExecutionMetadataFactoryService } from './execution/context/factory/default-execution-metadata-factory/default-execution-metadata-factory.service';
 import { DefaultExecutionStateFactoryService } from './execution/context/factory/default-execution-state-factory/default-execution-state-factory.service';
 import { DefaultExecutionRuntimeFactoryService } from './execution/context/factory/default-execution-runtime-factory/default-execution-runtime-factory.service';
+import { DefaultDecisionNodeSelectionPipelineService } from './execution/pipelines/default-decision-node-selection-pipeline/default-decision-node-selection-pipeline.service';
+import { DefaultExecutionFrameFactoryService } from './execution/context/factory/default-execution-frame-factory/default-execution-frame-factory.service';
+import { DefaultExecutionResourceFactoryService } from './execution/context/factory/default-execution-resource-factory/default-execution-resource-factory.service';
+import { ExecutionInitializationPipelineService } from './execution/context/initialization/execution-initialization-pipeline/execution-initialization-pipeline.service';
+import { ExecutionEngineService } from './execution/engine/execution-engine/execution-engine.service';
 @Module({
   imports: [LogsModule,PluginsModule],
   providers: [
@@ -229,7 +234,7 @@ DefaultPluginPipelineService,
 DefaultPluginPipelineService,
 
 DefaultMiddlewareChainService,
-, DefaultExecutionContextFactoryService, ExecutionTimingMiddlewareService, DefaultDecisionPatchPipelineService, DefaultRuntimePipelineService, DefaultTransitionPipelineService, DefaultRuntimeDiffPipelineService, DefaultExecutionCommitPipelineService, DefaultExecutionPipelineRunnerService, DefaultExecutionMetadataFactoryService, DefaultExecutionStateFactoryService, DefaultExecutionRuntimeFactoryService,
+, DefaultExecutionContextFactoryService, ExecutionTimingMiddlewareService, DefaultDecisionPatchPipelineService, DefaultRuntimePipelineService, DefaultTransitionPipelineService, DefaultRuntimeDiffPipelineService, DefaultExecutionCommitPipelineService, DefaultExecutionPipelineRunnerService, DefaultExecutionMetadataFactoryService, DefaultExecutionStateFactoryService, DefaultExecutionRuntimeFactoryService, DefaultDecisionNodeSelectionPipelineService, DefaultExecutionFrameFactoryService, DefaultExecutionResourceFactoryService, ExecutionInitializationPipelineService, ExecutionEngineService,
 
 ]
 })

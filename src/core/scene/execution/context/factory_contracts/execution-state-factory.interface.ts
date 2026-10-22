@@ -1,7 +1,8 @@
-import { ExecutionState } from "../execution-state.class";
+import { IExecutionState } from "../contracts/IExecutionState.interface";
+
 
 export interface ExecutionStateFactory {
 
-  create(): ExecutionState;
+  create(): IExecutionState;
 
 }

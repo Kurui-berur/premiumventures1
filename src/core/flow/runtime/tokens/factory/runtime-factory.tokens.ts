@@ -1,0 +1,3 @@
+export const RUNTIME_STORE_FACTORY=Symbol(
+    'RUNTIME_STORE_FACTORY'
+)

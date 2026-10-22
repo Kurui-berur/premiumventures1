@@ -1,3 +1,9 @@
-export type SceneTransitionTrigger =
-  | 'SCENE_COMPLETED'
-  | 'MANUAL';
+export type TriggerType =
+
+    | "SCENE_COMPLETED"
+
+    | "BUSINESS_OUTCOME"
+
+    | "EXTERNAL_EVENT"
+
+    | "MANUAL";

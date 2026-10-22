@@ -7,7 +7,7 @@ import { PLUGIN_REGISTRY } from 'src/core/plugins/tokens/plugins.tokens';
 import type { PluginRegistry } from 'src/core/plugins/contracts/plugin-registry.interface';
 import { EXECUTION_TRACKER } from '../../tokens/execution.tokens';
 import type { ExecutionTracker } from '../../contracts/execution-tracker.interface';
-import { ExecutionContext } from '../../contracts/execution-context.interface';
+import { ExecutionSession } from '../../context/execution-session.class';
 
 @Injectable()
 export class DefaultPluginExecutor implements PluginExecutor {
@@ -24,7 +24,7 @@ export class DefaultPluginExecutor implements PluginExecutor {
      async execute(
 
     context:
-      ExecutionContext
+      ExecutionSession
 
   ): Promise<
       PluginDecision

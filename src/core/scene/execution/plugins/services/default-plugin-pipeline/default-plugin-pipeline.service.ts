@@ -35,7 +35,7 @@ import type {
 import type {
   PluginMiddleware
 } from '../../../contracts/middlewares/plugin-middleware.interface';
-import { ExecutionSession } from '../../../context/execution-context.class';
+import { ExecutionSession } from '../../../context/execution-session.class';
 import { ExecutionScope } from '../../../types/execution-scope.type';
 
 @Injectable()

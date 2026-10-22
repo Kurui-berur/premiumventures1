@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PluginMiddleware } from '../../../contracts/middlewares/plugin-middleware.interface';
 import { PluginDecision } from 'src/core/plugins/contracts/plugin-decision.interface';
-import { ExecutionSession } from '../../../context/execution-context.class';
+import { ExecutionSession } from '../../../context/execution-session.class';
 
 @Injectable()
 export class ExecutionTimingMiddlewareService implements PluginMiddleware {

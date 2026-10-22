@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { TransitionPipeline } from '../../contracts/pipelines/transition-pipeline.interface';
-import { ExecutionSession } from '../../context/execution-context.class';
+import { ExecutionSession } from '../../context/execution-session.class';
 import { ExecutionScope } from '../../types/execution-scope.type';
 import { EXECUTION_TRACKER, MIDDLEWARE_CHAIN, TRANSITION_EXECUTOR } from '../../tokens/execution.tokens';
 import type { TransitionExecutor } from '../../contracts/transition-executor.interface';

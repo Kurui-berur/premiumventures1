@@ -4,8 +4,9 @@ export const ExecutionScope = {
   TRANSITION: 'TRANSITION',
   RUNTIME: 'RUNTIME',
   RUNTIME_DIFF:'RUNTIME_DIFF',
-  EXECUTION_COMMIT:'EXECUTION_COMMIT'
-} as const;
+  EXECUTION_COMMIT:'EXECUTION_COMMIT',
+DECISION_NODE_SELECTION:"DECISION_NODE_SELECTION"
+} as const; 
 
 export type ExecutionScope =
   (typeof ExecutionScope)[keyof typeof ExecutionScope];

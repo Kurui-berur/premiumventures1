@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { RuntimeDiffPipeline } from '../../../../flow/runtime/contracts/pipelines/runtime-diff-pipeline.interface';
-import { ExecutionSession } from '../../context/execution-context.class';
+import { ExecutionSession } from '../../context/execution-session.class';
 import { ExecutionScope } from '../../types/execution-scope.type';
 import { RUNTIME_PATCH_BUILDER } from 'src/core/flow/runtime/tokens/runtime-tokens';
 import type { RuntimePatchBuilder } from 'src/core/flow/runtime/contracts/runtime-patch-bulder.interface';
@@ -43,7 +43,7 @@ export class DefaultRuntimeDiffPipelineService implements RuntimeDiffPipeline{
 
                 async ()=>{
 
-                            const original=context.frame.state
+                            const original=context.frame.runtime
 
                             const  current=context.runtime.current()
                             
@@ -51,7 +51,7 @@ export class DefaultRuntimeDiffPipelineService implements RuntimeDiffPipeline{
 
                             const runtimediff=new RuntimeDiff(patches)
 
-                            context.state.recordRuntimeDiff(runtimediff)
+                            context.state.runtimeDiff.record(runtimediff)
 
                 }
 
