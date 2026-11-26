@@ -9,7 +9,7 @@ decision result
 renderer
 compiled instruction
  */
-export interface FlowNode {
+ interface FlowNode {
   readonly id: string;
 
   /**

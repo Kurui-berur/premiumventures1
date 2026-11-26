@@ -18,4 +18,4 @@ export interface CompiledScene {
   transitions: readonly SceneTransition[];
 
   completionMode: 'ALL_COMPLETED' | 'ANY_COMPLETED';
-}
+} 

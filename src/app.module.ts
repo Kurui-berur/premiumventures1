@@ -29,6 +29,7 @@ import { InMemomryFlowRuntimeStorService } from './cor/flow/runtime/store/in-mem
 import { ApplicationModule } from './application/application.module';
 import { DefaultFlowApplicationServicesTsService } from './appplication/services/default-flow-application.services.ts/default-flow-application.services.ts.service';
 import { FlowModule } from './flow/flow.module';
+import { FlowModule } from './flow/flow.module';
 import { ObservabilityModule } from './observability/observability.module';
 import { EventSystemModule } from './event-system/event-system.module';
 import { DecisionModule } from './core/decision/decision.module';

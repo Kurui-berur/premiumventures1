@@ -18,7 +18,7 @@ export interface ObservationFactory {
    *
    * @returns The constructed observation.
    */
-  create<TPayload>(
+  create<TPayload >(
     input: ObservationInput<TPayload>,
   ): Observation<TPayload>;
 }

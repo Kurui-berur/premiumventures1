@@ -1,3 +1,0 @@
-export const FLOW_SESSION_EXECUTOR=Symbol(
-    'FLOW_SESSION_EXECUTOR'
-)
